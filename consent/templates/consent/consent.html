@@ -1,0 +1,49 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+Welcome 
+{% endblock %}
+
+{% block content %}
+
+<p>
+You have been invited to take part in a study by researchers at the University of Essex
+Department of Government to learn more about group decision making. If you agree to be in this study, 
+you will answer a few questions and then interact with other participants in a short game. 
+Your participation in the study may last up to 15 minutes and you may have to wait for up to 
+5 minutes until enough participants have joined this interactive study. There are no known 
+risks associated with this research beyond those of everyday life. Although you will receive 
+no direct benefits, this research may help us better understand how individuals think.
+<br>
+<br>
+
+You will receive a reward of $1 and additional bonus between $1 and $5 depending on yours and 
+other participants’ choices. You may refuse to participate or withdraw at any time. 
+However, if you withdraw before the end of the study, you will receive no payment. 
+<br>
+<br>
+
+The confidentiality of your research records and identity will be strictly maintained. To preserve 
+the anonymity of the data, each person is assigned a random code number that will be used to keep 
+track of data produced. Results of the study in any presentation or publication will 
+include only group results, and no identifying information will ever be used.
+<br>
+<br>
+
+<strong>By hitting the Next button:</strong>
+<ol>
+<li>You confirm that you have read and understand the information above and understand that you
+	may contact the researcher to ask questions. <br>
+<li>You understand that your participation is voluntary and that you are free to withdraw from the 
+	study at any time. <br>
+<li>You understand that data collected in this study might be shared as appropriate and for 
+	publication of findings, in which case data will remain completely anonymous. <br>
+<li>You agree to take part in the study.
+</ol>
+</p>
+
+<span align="right">
+{% next_button %}
+</span>
+{% endblock %}

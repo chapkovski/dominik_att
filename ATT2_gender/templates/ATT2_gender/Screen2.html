@@ -1,0 +1,121 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    <p>
+        You are {{ role }}.
+    </p>
+
+    <br>
+
+    <p>
+        You have been matched with Player 2 who identifies as {{ other_gender }}.
+    </p>
+
+
+{% endblock %}
+
+{% block content %}
+
+{% formfield group.demand with label="What minimal outcome do you think Player 2 will demand to give you a bonus?" %}
+
+{% formfield group.effort with label="Please choose you level of effort."%}
+
+<input type="hidden" name="demandArray" id="id_demandArray" value=""/>
+{{ form.demandArray.errors }}
+
+<input type="hidden" name="effortArray" id="id_effortArray" value=""/>
+{{ form.effortArray.errors }}
+
+<p>
+	If you are right that Player 2 demands an outcome of at least <span style="font-weight: bold;" id="demand">...</span> 
+	then, given your special number of {{ special_number }}, choosing effort 
+	<span style="font-weight: bold;" id="effort">...</span> will give you
+</p>
+
+<p align="center">
+    with probability 1/3 $ <span id="payoff1">...</span>
+</p>
+<p align="center">
+    with probability 1/3 $ <span id="payoff2">...</span>
+</p>
+<p align="center">
+    with probability 1/3 $ <span id="payoff3">...</span>
+</p>
+
+<p>
+Press the next button to proceed.
+</p>
+
+<span align="right">
+{% next_button %}
+</span>
+
+<br>
+<br>
+<br>
+<br>
+
+{% include "ATT2_gender/Introduction/Introduction.html" %}
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+var radios1 = document.getElementsByName('demand');
+var radios2 = document.getElementsByName('effort');
+var demandArray = [];
+var effortArray = [];
+var currentDemand = 0;
+var special_number = {{ special_number }};
+
+for(var i = 0; i < radios1.length; i++) {
+    radios1[i].onclick = function() {
+		document.getElementById("payoff1").innerHTML = '...';
+		document.getElementById("payoff2").innerHTML = '...';
+		document.getElementById("payoff3").innerHTML = '...';
+		document.getElementById("effort").innerHTML = '...';
+        console.log(this.value)
+        document.getElementById("demand").innerHTML = this.value;
+		currentDemand = this.value;
+		demandArray.push(this.value);
+		document.getElementById("id_demandArray").value = demandArray;	
+    };
+}
+
+for(var i = 0; i < radios2.length; i++) {
+    radios2[i].onclick = function() {
+        console.log(this.value)
+        document.getElementById("effort").innerHTML = this.value; 
+		effortArray.push(currentDemand + "-" + this.value);
+		document.getElementById("id_effortArray").value = effortArray;	
+		outcome1 = (Number(this.value) + Number(special_number) + -1);
+		outcome2 = (Number(this.value) + Number(special_number));
+		outcome3 = (Number(this.value) + Number(special_number) + +1);
+		if(outcome1>=currentDemand){
+			payoff1 = Math.round(100 * (6 * Math.sqrt(outcome1 + 1) - (Number(this.value)*1.95) )) / 100;
+			}
+		else {
+			payoff1 = Math.round(100 * (6 * Math.sqrt(outcome1) - (Number(this.value)*1.95) )) / 100;
+			}
+		if(outcome2>=currentDemand){
+			payoff2 = Math.round(100 * (6 * Math.sqrt(outcome2 + 1) - (Number(this.value)*1.95) )) / 100;
+			}
+		else {
+			payoff2 = Math.round(100 * (6 * Math.sqrt(outcome2) - (Number(this.value)*1.95) )) / 100;
+			}
+		if(outcome3>=currentDemand){
+			payoff3 = Math.round(100 * (6 * Math.sqrt(outcome3 + 1) - (Number(this.value)*1.95) )) / 100;
+			}
+		else {
+			payoff3 = Math.round(100 * (6 * Math.sqrt(outcome3) - (Number(this.value)*1.95) )) / 100;
+			}
+		document.getElementById("payoff1").innerHTML = payoff1;
+		document.getElementById("payoff2").innerHTML = payoff2;
+		document.getElementById("payoff3").innerHTML = payoff3;
+    };
+}
+</script>
+
+{% endblock %}

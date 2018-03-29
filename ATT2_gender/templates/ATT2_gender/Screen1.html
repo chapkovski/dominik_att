@@ -1,0 +1,53 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+ 
+Round {{ round }} of {{ num_rounds }}
+
+{% endblock %}
+
+{% block content %}
+
+<p>
+    In this round you are {{ role }}.
+</p>
+
+{% if role == 'Player 1' %}
+
+<p>
+
+Your special number is {{ special_number }}.
+
+</p>
+
+<p>
+
+Press the next button to match with Player 2.
+
+</p>
+
+
+{% endif %}
+
+{% if role == 'Player 2' %}
+
+<p>
+Press the next button to match with Player 1.
+</p>
+
+{% endif %}
+
+
+<span align="right">
+{% next_button %}
+</span>
+
+<br>
+<br>
+<br>
+<br>
+
+{% include "ATT2_gender/Introduction/Introduction.html" %}
+
+{% endblock %}

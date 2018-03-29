@@ -1,0 +1,25 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+To get started, a few questions about your demographics...
+{% endblock %}
+
+{% block content %}
+Please answer the following questions:</strong>
+<br>
+<br>
+
+{% formfield player.age %}
+
+{% formfield player.state %}
+
+{% formfield player.gender %}
+
+{% formfield player.race %}
+
+<span align="right">
+{% next_button %}
+</span>
+
+{% endblock %}	

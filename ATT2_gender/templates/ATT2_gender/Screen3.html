@@ -1,0 +1,44 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    <p>
+		You are {{ role }}.
+    </p>
+
+    <br>
+
+    <p>
+        Player 1 identifies as {{ other_gender }}.
+    </p>
+
+{% endblock %}
+
+{% block content %}
+
+<p>
+    The choice outcome is {{ choice_outcome }}.
+</p>
+
+{% formfield group.choice with label="Please choose whether you think the special number or the effort is higher." %}
+
+{% formfield group.bonus with label="Please choose whether you want to give Player 1 a bonus." %}
+
+<p>
+
+Press the 'next' button to proceed to the next page.
+
+</p>
+
+<span align="right">
+{% next_button %}
+</span>
+
+<br>
+<br>
+<br>
+<br>
+
+{% include "ATT2_gender/Introduction/Introduction.html" %}
+
+{% endblock %}

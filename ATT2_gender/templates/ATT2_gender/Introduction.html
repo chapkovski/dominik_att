@@ -1,0 +1,137 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+Now, you are going to interact with other participants:
+{% endblock %}
+
+{% block content %}
+<script src=
+http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML
+></script>
+
+<p>
+  	Please read the instructions below. These instructions will also be shown 
+	to you while you are making your decisions. 
+</p>
+		
+<p>
+The interaction will be repeated for {{ num_rounds }} rounds and you will play 
+with 1 other participant in each round. 
+</p>				
+
+<br>
+<p>
+<strong>
+Instructions
+</strong>
+<p>
+In this interaction, at the beginning of the first round, you will be randomly
+assigned a role of either <i> Player 1</i> or <i> Player 2</i>. You will keep that
+role for the rest of the interaction. In each round, you will be matched
+with another participant in the study into a pair consisting of one
+<i>Player 1</i> and one <i>Player 2</i>.
+
+</p>
+
+<p>
+In each round, if you are <i> Player 1 </i> you will be randomly assigned
+a number 1, 2, or 3 – called <i> special number </i> – shown only to you
+and every of those numbers is equally likely to occur.
+</p>
+
+<p>
+<b> Choices </b>
+</p>
+
+<p>
+If you are <i>Player 1</i> you choose a number 1, 2, or 3 – called
+<i>effort</i>. 
+</p>
+
+<p>
+Then, an 
+<ul style="list-style: none;"> 
+<li><i>outcome = effort + special number + random bump</i> 
+</ul>
+is computed where <i>random bump</i> is a randomly chosen number -1, 0, or 1 and every 
+of those numbers is equally likely to occur.
+</p>
+
+<p>
+If you are <i>Player 2</i> you make two choices after you are shown
+the <i>outcome</i>:
+<ol>
+<li> You are asked to guess whether <i>Player 1’s</i> 'effort is higher' or
+<i>Player 1’s</i> 'special number is higher'
+<li> You chose whether you want
+to give a <i>bonus</i> (another additional payment) to <i>Player 1</i>
+</ol>
+</p>
+
+<p>
+<b>Additional payments</b>
+</p>
+
+{% if num_rounds > 1 %}
+<p>
+Your additional payment is determined from what happened in 1 randomly 
+chosen round of the {{ num_rounds }} rounds you played.
+</p>
+{% endif %}
+
+<p>
+If you are <i>Player 1</i>, your additional payments are increasing in
+the <i>outcome</i> you generate and in whether <i>Player 2</i> gives you a
+<i>bonus</i>. What these payments are exactly, is shown to you on
+the screen once you actually make that choice.
+</p>
+
+<p>
+If you are <i>Player 2</i>, your additional payments from the game is
+computed as
+<ul style="list-style: none;"> 
+<li><i>outcome + effort</i> when you chose 'effort is higher'
+<li><i>outcome + special number</i> when you chose 'special number is higher.'
+</ul>
+</p>
+
+<p>
+That means, 
+<ul>
+<li>when <i>Player 1</i> chose an <i>effort</i> that is higher 
+than <i>Player 1’s special number</i>, and you chose 'effort is higher,'
+then you receive a higher payoff than when you chose
+'special number is higher.' 
+<li> when <i>Player 1’s special number</i> is higher 
+than <i>effort</i>, and you chose '<i>special number</i> is higher,'
+then you receive a higher payoff than when you chose '<i>effort</i> is
+higher.'
+</ul>
+</p>
+
+<p>
+Example: Say <i>Player 1</i> is assigned a <i>special number</i> of 2,
+<i>Player 1</i> chooses <i>effort</i> of 1, the <i>random bump</i> is 0, and you
+chose 'special number is higher'. Your additional payment would
+be
+</p>
+
+<p align="center">
+
+2 + 1 + 0 + 2 = $5 
+
+</p>
+
+<p>
+If you chose 'effort is higher', your additional payment would be
+</p>
+
+<p align="center">
+2 + 1 + 0 + 1 = $4
+</p>
+
+<span align="right">
+{% next_button %}
+</span>
+{% endblock %}

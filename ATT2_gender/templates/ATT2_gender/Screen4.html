@@ -1,0 +1,48 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    End of round {{round}}.
+{% endblock %}
+
+{% block content %}
+
+{% if role == 'Player 1' %}
+
+<p> Your special number is {{ special_number }}. </p>
+<p> Your level of effort was {{ effort }}. </p>
+<p> Your choice outcome is {{ choice_outcome }}. </p>
+
+{% if bonus == 1 %}
+<p> Player 2 decided to give you a bonus. </p>
+
+{% else %}
+<p> Player 2 decided to not give you a bonus. </p>
+{% endif %}
+
+<p> If this round is randomly chosen to determine your additional payments,  
+	you would earn {{ payoff }}. </p>
+
+{% else %}
+
+<p> The increased choice outcome is {{ increased_choice_outcome }}. </p>
+<p> If this round is randomly chosen to determine your additional
+		payments, you would earn {{ payoff }}.</p>
+
+{% endif %}
+
+
+<p> Please press the next button to proceed to the next round. </p>
+
+<span align="right">
+{% next_button %}
+</span>
+
+<br>
+<br>
+<br>
+<br>
+
+{% include "ATT2_gender/Introduction/Introduction.html" %}
+
+{% endblock %}

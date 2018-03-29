@@ -1,0 +1,110 @@
+
+<br>
+<p>
+<strong>
+Instructions
+</strong>
+<p>
+In this interaction, at the beginning of the first round, you will be randomly
+assigned a role of either <i> Player 1</i> or <i> Player 2</i>. You will keep that
+role for the rest of the interaction. In each round, you will be matched
+with another participant in the study into a pair consisting of one
+<i>Player 1</i> and one <i>Player 2</i>.
+
+</p>
+
+<p>
+In each round, if you are <i> Player 1 </i> you will be randomly assigned
+a number 1, 2, or 3 – called <i> special number </i> – shown only to you
+and where each of these <i> special numbers </i> is equally likely to be
+assigned by the computer.
+</p>
+
+<p>
+<b> Choices </b>
+</p>
+
+<p>
+If you are <i>Player 1</i> you choose a number 1, 2, or 3 – called
+<i>effort</i>. 
+</p>
+
+<p>
+Then, 
+</p>
+<p align="center">
+<i>outcome = effort + special number + random bump</i>
+</p>
+
+<p>
+is computed where <i>random bump</i> is a randomly chosen number -1, 0, or 1
+and every of those numbers is equally likely to occur.
+</p>
+
+<p>
+If you are <i>Player 2</i> you make two choices after you are shown
+the <i>outcome</i>:<br>
+1. you are asked whether you think <i>effort is higher</i> or
+<i>special number is higher</i><br>
+2. you chose whether you want
+to give a <i>bonus</i> (another additional payment) to <i>Player 1</i>.
+</p>
+
+<p>
+<b>Additional payments</b>
+</p>
+
+{% if num_rounds > 1 %}
+<p>
+You additional payment is determined from what happened in 1 randomly 
+chosen round of the {{ num_rounds }} you played.
+</p>
+{% endif %}
+
+<p>
+If you are <i>Player 1</i>, your additional payments are increasing in
+the <i>outcome</i> you generate and in whether <i>Player 2</i> gives you a
+<i>bonus</i>. What these payments are exactly, is shown to you on
+the screen once you actually make that choice.
+</p>
+
+<p>
+If you are <i>Player 2</i>, your additional payments from the game is
+computed as
+</p>
+
+<p align="center">
+<i>outcome +
+    (effort is higher)*(effort) + (special number is higher)*(special number)</i>
+</p>
+
+<p>
+That means, when <i>Player 1</i> chose an <i>effort</i> that is higher 
+than <i>Player 1’s</i> special number, and you chose '<i>effort</i> is higher,'
+then you receive a higher payoff than when you chose
+'<i>special number</i> is higher.' When <i>special number</i> is higher 
+than <i>effort</i>, and you chose '<i>special number</i> is higher,'
+then you receive a higher payoff than when you chose '<i>effort</i> is
+higher.'
+</p>
+
+<p>
+Example: Say <i>Player 1</i> is assigned a <i>special number</i> of 2,
+<i>Player 1</i> chooses <i>effort</i> of 1, the <i>random bump</i> is 0, and you
+think <i>special number</i> is higher. Your additional payment would
+be
+</p>
+
+<p align="center">
+
+2 + 1 + 0 + 2 = $5 
+
+</p>
+
+<p>
+If you think <i>effort</i> is higher, your additional payment would be
+</p>
+
+<p align="center">
+2 + 1 + 0 + 1 = $4
+</p>

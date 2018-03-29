@@ -1,0 +1,28 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Thank you for participating in our study!
+{% endblock %}
+
+{% block content %}
+
+<p>
+    You earned additional payment of {{ chosen_payoff }}.
+
+</p>
+
+<p>
+    Your total earnings from participating in this study are {{ total_payoff }}.
+</p>
+
+<p>
+    Please press the next button to
+    go back to MTurk. You will receive your payment soon.
+</p>
+
+<span align="right">
+{% next_button %}
+</span>
+
+{% endblock %}
