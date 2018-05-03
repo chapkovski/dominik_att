@@ -5,11 +5,11 @@ from .models import Constants, Match, MatchLookup
 import random
 import math
 import time
-# from otree_mturk_utils.views import CustomMturkPage, CustomMturkWaitPage
+from otree_mturk_utils.views import CustomMturkPage, CustomMturkWaitPage
 import itertools
 
 
-class GroupingWaitpage(WaitPage):
+class GroupingWaitpage(CustomMturkWaitPage):
     group_by_arrival_time = True
     use_task = False
     startwp_timer = 300
@@ -28,8 +28,6 @@ class GroupingWaitpage(WaitPage):
     def get_players_for_group(self, waiting_players):
         p1s = [p for p in waiting_players if p.role() == 'Player 1']
         p2s = [p for p in waiting_players if p.role() == 'Player 2']
-        print('P1S', p1s)
-        print('P2S', p2s)
         if len(waiting_players) >= Constants.players_per_group and len(p1s) > 0 and len(p2s) > 0:
             # our goal here is to check whether a pair of particular players haven't been matched before
 
@@ -54,41 +52,7 @@ class GroupingWaitpage(WaitPage):
             slowpokes = [p for p in self.session.get_participants() if p._index_in_pages < self._index_in_pages]
             if len(slowpokes)<1:
                 return waiting_players
-                    # return waiting_players
-                    # if self.subsession.round_number == 1:
-                    #     newest_player = waiting_players[-1]
-                    #     possible_partners = waiting_players[:-1]
-                    #     if len(possible_partners) >= Constants.players_per_group - 1:
-                    #         return possible_partners[:Constants.players_per_group - 1] + [newest_player]
-                    #     matrix = self.subsession.get_group_matrix()
-                    #     print('Matrix"', matrix)
-                    #
-                    # if self.subsession.round_number == 2:
-                    #     newest_player = []
-                    #     already_waiting = []
-                    #     newest_player = waiting_players[-1]
-                    #     already_waiting = waiting_players[:-1]
-                    #     possible_partners = [p for p in already_waiting if
-                    #                          p.participant.vars['role'] != newest_player.participant.vars['role'] and
-                    #                          p.in_round(1).group != newest_player.in_round(1).group]
-                    #     if len(possible_partners) >= Constants.players_per_group - 1:
-                    #         return possible_partners[:Constants.players_per_group - 1] + [newest_player]
-                    #     matrix = self.subsession.get_group_matrix()
-                    #     print('Matrix"', matrix)
-                    #
-                    # if self.subsession.round_number == 3:
-                    #     newest_player = []
-                    #     already_waiting = []
-                    #     newest_player = waiting_players[-1]
-                    #     already_waiting = waiting_players[:-1]
-                    #     possible_partners = [p for p in already_waiting if
-                    #                          p.participant.vars['role'] != newest_player.participant.vars['role'] and
-                    #                          p.in_round(1).group != newest_player.in_round(1).group and
-                    #                          p.in_round(2).group != newest_player.in_round(2).group]
-                    #     if len(possible_partners) >= Constants.players_per_group - 1:
-                    #         return possible_partners[:Constants.players_per_group - 1] + [newest_player]
-                    #     matrix = self.subsession.get_group_matrix()
-                    #     print('Matrix"', matrix)
+
 
 
 # class Demographics(CustomMturkPage):
@@ -102,16 +66,16 @@ class GroupingWaitpage(WaitPage):
 #         self.player.participant.vars['gender'] = self.player.gender
 #
 #
-# class Introduction(CustomMturkPage):
-#     timeout_seconds = 300
-#
-#     def is_displayed(self):
-#         return self.subsession.round_number == 1
-#
-#     def vars_for_template(self):
-#         return {
-#             'num_rounds': Constants.num_rounds
-#         }
+class Introduction(CustomMturkPage):
+    timeout_seconds = 30000
+
+    # def is_displayed(self):
+    #     return self.subsession.round_number == 1
+
+    def vars_for_template(self):
+        return {
+            'num_rounds': Constants.num_rounds
+        }
 #
 #
 # class IntroductionWaitpage(CustomMturkWaitPage):
@@ -290,7 +254,7 @@ class GroupingWaitpage(WaitPage):
 page_sequence = [
     GroupingWaitpage,
     # Demographics,
-    # Introduction,
+    Introduction,
     # IntroductionWaitpage,
     # Screen1,
     # Screen1Waitpage,

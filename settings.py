@@ -63,7 +63,7 @@ LANGUAGE_CODE = 'en'
 # if an app is included in SESSION_CONFIGS, you don't need to list it here
 INSTALLED_APPS = [  'localflavor',
                     'otree',
-                    # 'otree_mturk_utils'
+                    'otree_mturk_utils'
                 ]
 
 DEMO_PAGE_INTRO_TEXT = """
