@@ -29,7 +29,7 @@ ADMIN_USERNAME = 'admin'
 ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
 
 # don't share this with anybody.
-SECRET_KEY = environ.get('SECRET_KEY')
+# SECRET_KEY = environ.get('SECRET_KEY')
 
 BROWSER_COMMAND = 'firefox'
 
@@ -63,7 +63,7 @@ LANGUAGE_CODE = 'en'
 # if an app is included in SESSION_CONFIGS, you don't need to list it here
 INSTALLED_APPS = [  'localflavor',
                     'otree',
-                    'otree_mturk_utils'
+                    # 'otree_mturk_utils'
                 ]
 
 DEMO_PAGE_INTRO_TEXT = """
@@ -154,7 +154,10 @@ SESSION_CONFIGS = [
             'name': 'ATT2_gender',
             'display_name': "Alleviating discrimination experiment with gender IDs",
             'num_demo_participants': 6,
-            'app_sequence': ['consent','ATT2_gender'],
+            'app_sequence': [
+                # 'consent',
+                'ATT2_gender'
+            ],
             'use_browser_bots': False,
             'doc': """
             The number of participants needs to be a multiple of (round_number) * 2 
